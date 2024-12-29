@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+   <changeSet id="202408231006" author="slazic">
+        <insert tableName="authorities">
+            <column name="id" value="f629e80b-5d1c-41df-9079-6952308ee5cc"/>
+            <column name="authority_name" value="USER"/>
+        </insert>
+        <insert tableName="authorities">
+            <column name="id" value="65d2e31d-dc26-4f77-a4d0-6c06e52d7fcf"/>
+            <column name="authority_name" value="MANAGER"/>
+        </insert>
+        <insert tableName="authorities">
+            <column name="id" value="3f872726-855b-4d3b-a358-a6b0e434b47e"/>
+            <column name="authority_name" value="ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202408231011" author="slazic">
+        <insert tableName="accounts">
+            <column name="id" value="4c24d539-061c-4c4a-9b50-9abfed966bb2"/>
+            <column name="first_name" value="Srđan"/>
+            <column name="last_name" value="Lazić"/>
+            <column name="username" value="slazic"/>
+            <column name="email" value="slazic@etfos.hr"/>
+            <column name="password" value="$2a$10$Mhm8GITv7Tv9Y6Mz6505Ke1j/bMxtrMTY9rs8P/9TnoNzDNMpEgSa"/>
+            <column name="verified" value="true"/>
+            <column name="locked" value="false"/>
+            <column name="hash_identifier" value="ea1b10fe6303ec51a4e18b56997865c69585f9464b6c88037e4adf0f3d405253" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="202408231018" author="slazic">
+        <insert tableName="accounts_authorities">
+            <column name="account_id" value="4c24d539-061c-4c4a-9b50-9abfed966bb2"/>
+            <column name="authority_id" value="f629e80b-5d1c-41df-9079-6952308ee5cc"/>
+        </insert>
+        <insert tableName="accounts_authorities">
+            <column name="account_id" value="4c24d539-061c-4c4a-9b50-9abfed966bb2"/>
+            <column name="authority_id" value="65d2e31d-dc26-4f77-a4d0-6c06e52d7fcf"/>
+        </insert>
+        <insert tableName="accounts_authorities">
+            <column name="account_id" value="4c24d539-061c-4c4a-9b50-9abfed966bb2"/>
+            <column name="authority_id" value="3f872726-855b-4d3b-a358-a6b0e434b47e"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="202408231020" author="slazic">
+        <update tableName="accounts_authorities">
+            <column name="revoked_at" value="2024-09-18 13:34:02.852237" />
+            <where>
+                account_id='4c24d539-061c-4c4a-9b50-9abfed966bb2'
+                and authority_id='65d2e31d-dc26-4f77-a4d0-6c06e52d7fcf'
+                and revoked_at is null
+            </where>
+        </update>
+    </changeSet>
+
+    <changeSet id="202408231025" author="slazic">
+        <insert tableName="accounts_authorities">
+            <column name="account_id" value="4c24d539-061c-4c4a-9b50-9abfed966bb2"/>
+            <column name="authority_id" value="65d2e31d-dc26-4f77-a4d0-6c06e52d7fcf"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202408231026" author="slazic">
+        <update tableName="accounts_authorities">
+            <column name="revoked_at" value="2024-09-18 13:34:03.421412" />
+            <where>
+                account_id='4c24d539-061c-4c4a-9b50-9abfed966bb2'
+                and authority_id='65d2e31d-dc26-4f77-a4d0-6c06e52d7fcf'
+                and revoked_at is null
+            </where>
+        </update>
+    </changeSet>
+
+    <changeSet id="202408231027" author="slazic">
+        <insert tableName="accounts">
+            <column name="id" value="4c24d539-061c-4c4a-9b50-9abfed966bb3"/>
+            <column name="first_name" value="Karlo"/>
+            <column name="last_name" value="Buhinjak"/>
+            <column name="username" value="kbuhinjak"/>
+            <column name="email" value="kbuhinjak@etfos.hr"/>
+            <column name="password" value="$2a$10$Mhm8GITv7Tv9Y6Mz6505Ke1j/bMxtrMTY9rs8P/9TnoNzDNMpEgSa"/>
+            <column name="verified" value="true"/>
+            <column name="locked" value="false"/>
+            <column name="hash_identifier" value="ea1b10fe6303ec51a4e18b56997865c69585f9464b6c88037e4adf0f3d405252" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="202408231028" author="slazic">
+        <insert tableName="accounts_authorities">
+            <column name="account_id" value="4c24d539-061c-4c4a-9b50-9abfed966bb3"/>
+            <column name="authority_id" value="3f872726-855b-4d3b-a358-a6b0e434b47e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202412251030" author="slazic">
+        <tagDatabase tag="test-0.0.1"/>
+    </changeSet>
+</databaseChangeLog>
