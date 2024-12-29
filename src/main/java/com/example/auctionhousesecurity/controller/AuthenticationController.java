@@ -45,6 +45,6 @@ public class AuthenticationController {
 
         //TODO implement JWT service that will generate JWT token
 
-        return ResponseEntity.status(HttpStatus.OK).body("ej00esj - example");
+        return ResponseEntity.status(HttpStatus.OK).body("ej00esji - example");
     }
 }
