@@ -4,6 +4,7 @@ import com.example.auctionhousesecurity.dto.response.ExceptionResponse;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,12 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@ControllerAdvice(
-        basePackageClasses = {
-                AccountController.class,
-                AuthenticationController.class
-        }
-)
+@ControllerAdvice
 public class ExceptionControllerAdvice {
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
@@ -41,8 +37,15 @@ public class ExceptionControllerAdvice {
                 });
 
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionResponse(errorMessages, LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ExceptionResponse> handleAuthenticationException(AuthenticationException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(RuntimeException.class)
