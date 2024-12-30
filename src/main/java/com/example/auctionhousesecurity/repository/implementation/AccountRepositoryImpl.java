@@ -182,7 +182,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
         } catch (EmptyResultDataAccessException exception) {
             log.info("Account service tried to fetch account by email -> {}: {}", email, exception.getMessage());
-            throw new EmptyResultDataAccessException(MessageFormat.format("Account with email -> {0}, not found.", email), 1);
+            throw new EmptyResultDataAccessException(MessageFormat.format("Account with email {0} not found.", email), 1);
         } catch (DataAccessException exception) {
             log.error("Account service tried to fetch account by email -> {}: {}",email, exception.getMessage());
             throw new RuntimeException(exception.getMessage());

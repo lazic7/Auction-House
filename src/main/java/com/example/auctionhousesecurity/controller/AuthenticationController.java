@@ -34,8 +34,6 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@Valid @RequestBody final LoginRequestDTO dto) {
 
-        accountService.loadAccountByEmail(dto.getEmail());
-
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         dto.getEmail(),
@@ -43,7 +41,13 @@ public class AuthenticationController {
                 )
         );
 
-        //TODO implement JWT service that will generate JWT token
+        /*
+         * TODO implement JWT service that will generate JWT token
+         *  findByEmail removed because not needed, authenticationManager.authenticate validates authentication
+         *  authentication.authenticate does not save user to Security Context Holder -> JWT filter
+         *  authenticationManager.authenticate throws AuthenticationException
+         *  maybe JWT filter doesn't need to call authenticate or findUserByEmail again
+         */
 
         return ResponseEntity.status(HttpStatus.OK).body("ej00esji - example");
     }
